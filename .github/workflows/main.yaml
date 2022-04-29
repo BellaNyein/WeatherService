@@ -15,7 +15,7 @@ jobs:
   test_and_deploy:
     runs-on: ubuntu-latest
     env:
-      OPENWEATHERMAP_API: ${{secrets.openweathermap_api}}
+      OPENWEATHERMAP_KEY: ${{secrets.openweathermap_api}}
     steps:
     #https://github.com/marketplace/actions/setup-java-jdk
     - name: Setup JDK 17
@@ -37,11 +37,4 @@ jobs:
     - name: Run test
       run: mvc clean test
 
-    #https://github.com/marketplace/actions/deploy-to-heroku
-    - name:Deploy to Heroku
-      uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-      with:
-        heroku_api_key: ${{secrets.heroku_key}}
-        heroku_app_name: ${{secrets.heroku_app_name}}
-        heroku_email: ${{secrets.email}}
-        branch: ${{github.ref_name}}
+   
