@@ -30,6 +30,18 @@ jobs:
       with:
         maven-version: 3.8.2
 
-      #https://github.com/marketplace/actions/checkout
+    #https://github.com/marketplace/actions/checkout
     - name: Checkout the source
       uses: actions/checkout@v3
+
+    - name: Run test
+      run: mvc clean test
+
+    #https://github.com/marketplace/actions/deploy-to-heroku
+    - name:Deploy to Heroku
+      uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{secrets.heroku_key}}
+        heroku_app_name: ${{secrets.heroku_app_name}}
+        heroku_email: ${{secrets.email}}
+        branch: ${{github.ref_name}}
